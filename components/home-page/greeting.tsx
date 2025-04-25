@@ -12,7 +12,7 @@ export function Greeting() {
         'dark:bg-gradient-to-l dark:from-emerald-500 dark:to-lime-600'
       )}
     >
-      Howdy, fellow! <Twemoji emoji="waving-hand" size="base" />
+      你好呀! <Twemoji emoji="waving-hand" size="base" />
     </div>
   )
 }

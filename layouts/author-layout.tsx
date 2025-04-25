@@ -34,20 +34,14 @@ export function AuthorLayout({ children }: Props) {
                 Hi there <Twemoji emoji="waving-hand" />
               </h2>
               <p>
-                I'm <strong>Tuan Anh Huynh</strong> (alias <strong>Leo</strong> at work), a software
-                engineer from <strong>Vietnam</strong>. I have a passion for all things{' '}
-                <strong>Javascript</strong>. I enjoy building eCommerce software and stuff related
-                to web dev. I work mainly with <strong>Typescript</strong>, <strong>React</strong>,{' '}
-                <strong>NodeJS</strong>, <strong>Remix</strong>, and <strong>TailwindCSS</strong>.
+                你好，我是 小乐学长，目前是<strong>中南大学的一名在读研究生</strong>。
+                我对技术充满热情，尤其对<strong>全栈开发、大模型以及计算机视觉</strong>
+                这些前沿领域非常感兴趣。我享受探索如何将这些技术结合起来，无论是构建端到端的应用，还是深入研究算法的奥秘。
+                这个人博客对我而言，是一个记录学习过程、整理思路以及分享心得的平台。我认为，无论是动手实践、输出文字，还是与大家交流讨论，都是加深对这些复杂技术领域理解的绝佳方式。
+                非常欢迎大家在这里留下你们的评论和想法，期待与各位交流学习！
               </p>
               <p>
-                This blog serves as a journal for documenting and sharing the insights and knowledge
-                I've gained as a software engineer. Building, writing, and sharing things is a great
-                way for me to solidify my understanding of new concepts and ideas.
-              </p>
-              <p>
-                I would greatly appreciate any comments and thoughts on my posts{' '}
-                <Twemoji emoji="clinking-beer-mugs" />.
+                非常欢迎大家在我的文章下留下评论和想法 <Twemoji emoji="clinking-beer-mugs" />.
               </p>
             </div>
             <div>

@@ -42,21 +42,21 @@ export function TypedBios() {
     >
       <ul id="bios" className="hidden">
         <li>
-          I'm aliased as <span className="font-medium">Leo</span> at work.
+          我在工作中的别名是 <span className="font-medium">小乐</span>
         </li>
-        <li>I'm a learner, builder, and freedom seeker.</li>
-        <li>I live in Ha Noi, Viet Nam.</li>
-        <li>I was born in the beautiful Moc Chau plateau.</li>
-        <li>My first programming language I learned was Pascal.</li>
-        <li>I love web development.</li>
-        <li>I'm focusing on building eCommerce software.</li>
-        <li>I work mostly with JS/TS technologies.</li>
-        <li>I'm Tu Le's husband.</li>
+        <li>我是一个学习者、建造者和自由追求者.</li>
+        {/* <li>我住在越南河内.</li> */}
+        {/* <li>I was born in the beautiful Moc Chau plateau.</li> */}
+        <li>我学习的第一个编程语言是C语言.</li>
+        <li>我热爱 Web 开发.</li>
+        {/* <li>I'm focusing on building eCommerce software.</li> */}
+        <li>我主要使用 JS/TS 技术</li>
+        {/* <li>I'm Tu Le's husband.</li> */}
         <li>
-          I'm a dog-person. <Twemoji emoji="dog" />
+          我是一个喜欢狗的人. <Twemoji emoji="dog" />
         </li>
         <li>
-          I'm a sport-guy. I love
+            我是一个热爱健身的人.
           <span className="ml-1">
             <Twemoji emoji="soccer-ball" />,
             <Twemoji emoji="man-swimming" />,
@@ -64,7 +64,7 @@ export function TypedBios() {
             <Twemoji emoji="volleyball" />
           </span>
         </li>
-        <li>I love watching football.</li>
+        {/* <li>I love watching football.</li>
         <li>
           I love playing piano & guitar. <Twemoji emoji="musical-keyboard" /> &{' '}
           <Twemoji emoji="guitar" />
@@ -75,7 +75,7 @@ export function TypedBios() {
         </li>
         <li>
           I love playing video games, PES is my favorite one. <Twemoji emoji="video-game" />.
-        </li>
+        </li> */}
       </ul>
       <span ref={el} className="text-neutral-900 dark:text-neutral-200" />
     </div>
