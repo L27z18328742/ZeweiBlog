@@ -9,8 +9,8 @@ import { SITE_METADATA } from '~/data/site-metadata'
 import type { GithubRepository } from '~/types/data'
 import { fetcher } from '~/utils/misc'
 
-const TIME_IS = 'https://time.is/Hanoi'
-const MY_TIMEZONE = 'Asia/Ho_Chi_Minh'
+const TIME_IS = 'https://time.is/Beijing'
+const MY_TIMEZONE = 'Asia/Shanghai'
 const MY_TIMEZONE_OFFSET = 7 * -60 // UTC+7
 
 function getTime() {
@@ -56,7 +56,8 @@ export function FooterMeta() {
       <div className="flex items-center gap-2">
         <Map className="h-5 w-5" />
         <span className="font-medium">
-          [::1]:443 - Ha Noi, <Twemoji emoji="flag-vietnam" className="!h-4.5" />
+          [::1]:443 - 小乐学长
+          {/* <Twemoji emoji="flag-vietnam" className="!h-4.5" /> */}
         </span>
       </div>
       <div className="flex items-center gap-2">

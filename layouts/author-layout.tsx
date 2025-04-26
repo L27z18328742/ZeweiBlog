@@ -51,7 +51,7 @@ export function AuthorLayout({ children }: Props) {
             <div>
               <div className="mb-[1em] mt-[2em] flex items-center justify-between [&>h2]:my-0">
                 <h2>我的简历</h2>
-                <Button as="a" href="/static/resume.pdf" target="_blank">
+                <Button as="a" href="#" target="_blank">
                   <span></span>
                   <Twemoji emoji="page-facing-up" />
                 </Button>

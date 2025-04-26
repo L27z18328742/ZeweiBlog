@@ -11,6 +11,7 @@ export const MORE_NAV_LINKS = [
   { href: '/books', title: 'Books', emoji: 'books' },
   { href: '/movies', title: 'Movies', emoji: 'film-frames' },
   { href: '/tags', title: 'Tags', emoji: 'label' },
+  { href: '/games', title: 'Games', emoji: 'video-game' },
 ]
 
 export const FOOTER_NAV_LINKS = [
@@ -23,7 +24,7 @@ export const FOOTER_NAV_LINKS = [
 
 export const FOOTER_PERSONAL_STUFF = [
   { href: '/about', title: 'About' },
-  { href: '/static/resume.pdf', title: 'Resume' },
+  { href: '#', title: 'Resume' },
   { href: '/books', title: 'Books' },
   { href: '/movies', title: 'Movies' },
   { href: SITE_METADATA.analytics.umamiAnalytics.shareUrl, title: 'Analytics' },
