@@ -46,15 +46,16 @@ export function AuthorLayout({ children }: Props) {
             </div>
             <div>
               <div className="mb-[1em] mt-[2em] flex items-center justify-between [&>h2]:my-0">
-                <h2>My career</h2>
+                <h2>我的简历</h2>
                 <Button as="a" href="/static/resume.pdf" target="_blank">
-                  <span>Resume</span>
+                  <span></span>
                   <Twemoji emoji="page-facing-up" />
                 </Button>
               </div>
-              <CareerTimeline />
+              {/* <CareerTimeline /> */}
             </div>
-            <div>
+            {/* */}
+            {/* <div>
               <h2>Tech stack</h2>
               <p>
                 This blog is hosted on{' '}
@@ -115,11 +116,11 @@ export function AuthorLayout({ children }: Props) {
                   components, adding <code>/snippets</code>, <code>/books</code>,{' '}
                   <code>/movies</code> page, etc.
                 </li>
-                {/* <li>
+                <li>
                   <Twemoji emoji="inbox-tray" /> Bumping up <code>mdx-bundler</code>,{' '}
                   <code>rehype</code>/<code>remark</code> plugins and dependencies to the latest
                   version
-                </li> */}
+                </li>
               </ul>
               <p>
                 See my{' '}
@@ -149,8 +150,8 @@ export function AuthorLayout({ children }: Props) {
                   </li>
                 </ul>
               </div>
-            </div>
-            <div>
+            </div> */}
+            {/* <div>
               <h2>Assets</h2>
               <p>
                 Most of the images in my blog are from{' '}
@@ -170,19 +171,18 @@ export function AuthorLayout({ children }: Props) {
               <p>
                 Thanks for the free resources <Twemoji emoji="folded-hands" />.
               </p>
-            </div>
+            </div> */}
             <div>
-              <h2>Contact</h2>
+              <h2>联系我</h2>
               <p>
-                Reach out to me at{' '}
-                <a href={`mailto:${SITE_METADATA.email}`}>{SITE_METADATA.email}</a> or find me on
-                social media:
+                通过 at 联系我
+                <a href={`mailto:${SITE_METADATA.email}`}>{SITE_METADATA.email}</a> or social media:
               </p>
               <SocialAccounts />
             </div>
             <div>
-              <h2>Support</h2>
-              <p>If you appreciate my work, consider supporting me:</p>
+              <h2>支持我</h2>
+              <p>如果你觉得我做得还不错，就支持一下吧:</p>
               <div className="flex flex-col gap-4">
                 <a
                   href={SITE_METADATA.support.buyMeACoffee}

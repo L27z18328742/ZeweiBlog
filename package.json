@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "scripts": {
     "start": "npm run db:init && PORT=3435 next dev",
-    "dev": "npm run db:init && cross-env PORT=3434 INIT_CWD=$PWD next dev",
+    "dev": "cross-env PORT=3434 INIT_CWD=$PWD next dev",
     "build": "cross-env INIT_CWD=$PWD next build && npm run postbuild",
     "postbuild": "cross-env NODE_OPTIONS='--experimental-json-modules' tsx ./scripts/post-build.ts",
     "serve": "next start",

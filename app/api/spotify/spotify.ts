@@ -5,7 +5,8 @@ const SPOTIFY_TOP_TRACKS_API = `https://api.spotify.com/v1/me/top/tracks`
 let {
   SPOTIFY_CLIENT_ID: client_id,
   SPOTIFY_CLIENT_SECRET: client_secret,
-  SPOTIFY_REFRESH_TOKEN: refresh_token = '',
+  SPOTIFY_REFRESH_TOKEN:
+    refresh_token = 'AQDP7dH5HBHPvv1TGU9EjrW_NxIyisPgwjbO-VMp0hf6X0at5lOb_UqzmavcjBRO5UrxZg_4laWzgJe-er2XBk-o-mHwxXosuPeC0MDy7Q8Lq7CdsbfMKKkQ43SuFiu6Erw',
 } = process.env
 
 let basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64')
@@ -23,12 +24,14 @@ async function getAccessToken() {
       refresh_token,
     }),
   })
+  console.log('Spotify token response', response)
 
   return response.json()
 }
 
 export async function getNowPlaying() {
   let { access_token } = await getAccessToken()
+  console.log('Spotify access token', access_token)
   let url = new URL(SPOTIFY_NOW_PLAYING_API)
   url.searchParams.append('additional_types', 'track,episode')
 
