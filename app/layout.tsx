@@ -96,18 +96,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href={`${basePath}/static/favicons/favicon.png`}
+        href={`${basePath}/static/favicons/1.jpg`}
       />
       <link
         rel="icon"
         type="image/png"
         sizes="16x16"
-        href={`${basePath}/static/favicons/favicon.png`}
+        href={`${basePath}/static/favicons/1.jpg`}
       />
       <link rel="manifest" href={`${basePath}/static/favicons/site.webmanifest`} />
       <link
         rel="mask-icon"
-        href={`${basePath}/static/favicons/safari-pinned-tab.svg`}
+        href={`${basePath}/static/favicons/1.jpg`}
         color="#5bbad5"
       />
       <meta name="msapplication-TileColor" content="#000000" />

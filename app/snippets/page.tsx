@@ -18,13 +18,13 @@ export default function Snippets() {
         description={
           <>
             <p>
-              My personal stash of code snippets that make my life easier. They’re simple and
-              reusable. Feel free to copy, tweak, and use them as you like.
+            本人收集的常用代码片段，旨在提升个人工作效率。这些代码结构简洁，具备非常强的可重用性。
+根据您的需要，对这些片段进行复制、修改和使用。
             </p>
-            <p className="mt-3 italic">
+            {/* <p className="mt-3 italic">
               *Some snippets written by me, some are from the internet (Thanks to the open source
               community).
-            </p>
+            </p> */}
           </>
         }
         className="border-b border-gray-200 dark:border-gray-700"

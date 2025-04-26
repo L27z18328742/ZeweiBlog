@@ -3,8 +3,8 @@ export const SITE_METADATA = {
   author: 'Zewei',
   headerTitle: `Zewei's dev blog`,
   description:
-    'A personal space on the cloud where I document my programming journey, sharing lessons, insights, and resources for fellow developers.',
-  language: 'en-us',
+    '这算是我在网络上的一个小角落吧，主要就是用来记下我学编程、写代码的一些经历。我会把我踩过的坑、学到的经验、一点儿小想法，还有找到的一些好资源，都在这里分享出来，希望能帮助到其他的开发者朋友们。',
+  language: 'zh-CN',
   theme: 'system', // system, dark or light
   siteUrl: 'https://www.leohuynh.dev',
   siteRepo: 'https://github.com/L27z18328742',
@@ -18,7 +18,7 @@ export const SITE_METADATA = {
   linkedin: 'https://www.linkedin.com/in/hta218',
   threads: 'https://www.threads.net/hta218_',
   instagram: 'https://www.instagram.com/hta218_',
-  locale: 'en-US',
+  locale: 'zh-CN',
   stickyNav: true,
   goodreadsBookshelfUrl: 'https://www.goodreads.com/review/list/179720035-leo-huynh',
   goodreadsFeedUrl: 'https://www.goodreads.com/review/list_rss/179720035',
