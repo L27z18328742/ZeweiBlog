@@ -1,0 +1,66 @@
+---
+title: '如何让你的 Namecheap 私有邮箱与 Vercel DNS 协同工作'
+date: '2025-04-25'
+tags: ['private-email', 'namecheap', 'vercel', 'dns']
+summary: '一个关于如何让你的 Namecheap 私有邮箱与 Vercel DNS 协同工作的分步指南.'
+images:
+  ['/static/images/banners/brown-paper-with-silver-round-pendant__i_am_simoesse__hETJ5PBJDKw.jpeg']
+# authors: ['default']
+---
+
+我有一个用于我的个人网站 [leohuynh.dev](https://leohuynh.dev) 的 Namecheap 域名，并使用 **Vercel** 来管理我的网站部署。
+在我的情况下，我必须配置我的域名服务器指向 **Vercel 的 DNS** 服务器。在 Namecheap 上的配置如下：
+
+如果你使用 [Google Admin Toolbox](https://toolbox.googleapps.com/apps/dig/#NS/) 进行检查，结果应该看起来像这样：
+
+现在我刚刚从 Namecheap 购买了一个私有邮箱，但不知道如何配置它使其与 Vercel DNS 协同工作。
+Namecheap 提供了一个[指南](https://www.namecheap.com/support/knowledgebase/article.aspx/1055/2176/how-do-i-set-up-my-private-email-to-work/)说明如何操作，但对我来说不起作用。
+所以如果你有同样的问题，这里是解决方法。
+
+## 从 Namecheap 获取 DNS 记录
+
+Namecheap 会提供你需要配置的一系列必要 DNS 记录。
+你可以在 **Account / Dashboard / Private Email** 面板下找到它：
+
+除了这些，你还需要一条用于 DKIM (DomainKeys Identified Mail) 的记录。
+滚动到 **Email Security** 部分，点击 **Add DKIM record**（或点击 **Show DKIM** 查看现有记录）。
+
+这就是你需要配置的所有 DNS 记录（共 4 条）。
+
+## 将 DNS 记录添加到 Vercel
+
+登录你的 Vercel 账户，导航到 **Domains** 页面。你的托管域名应该会列在那里。
+
+点击你想要添加 DNS 记录的域名，在第一部分，你会看到一个表单，可以在此处添加你的 DNS 记录：
+
+现在将你从 Namecheap 获取的所有 4 条 DNS 记录添加到这里。请记住，对于 DKIM 的记录，
+**Name** 应该填写 `default._domainkey`，而 **Value** 是记录中的这一部分：
+
+```txt
+default._domainkey IN TXT ("<DKIM_VALUE>");
+```
+
+添加完所有 DNS 记录后，它们应该会列在表单正下方的表格中：
+
+就是这样！Namecheap 说你需要等待 1-2 小时让 DNS 记录传播，但这通常在几分钟内就能完成。
+
+现在你可以尝试向你的私有邮箱地址发送一封邮件，并通过登录 [Webmail](https://privateemail.com/) 查看是否奏效。
+你应该能在收件箱中看到邮件。
+
+## 附加：将 Gmail 设置为你的邮件客户端
+
+你可能会注意到私有邮箱的 UI 不太友好。
+因此，我强烈建议你将 Gmail 设置为你的邮件客户端，以便更轻松地管理你的邮件。
+在 Gmail 收件箱中撰写、发送和查看邮件会方便得多，因为你肯定对 Gmail 更熟悉。
+
+Namecheap 提供了一个[详细指南](https://www.namecheap.com/support/knowledgebase/article.aspx/9188/2175/gmail-fetcher-setup-for-namecheap-private-email/)说明如何操作。
+你只需按照步骤操作即可。
+
+需要注意的一点是，在电子邮件设置步骤中，你应该勾选 **"Label incoming messages"** 复选框，以便更轻松地管理你的邮件。
+
+你的邮件应该会自动获取，你可以在 Gmail 收件箱的 **Labels** 部分找到它们。
+
+撰写邮件时，请确保从 **From** 字段中选择正确的电子邮件地址。
+
+祝你邮件愉快！
+Happy emailing! <Twemoji emoji="clinking-beer-mugs" />

@@ -26,7 +26,8 @@ export const SITE_METADATA = {
   analytics: {
     umamiAnalytics: {
       websiteId: process.env.NEXT_UMAMI_ID,
-      shareUrl: 'https://analytics.leohuynh.dev/share/c9ErglxqzY5CQJ8g/leohuynh.dev',
+      shareUrl:
+        'https://umami-eight-lemon.vercel.app/websites/9d3d62c4-f05a-481f-9ad8-e5367ed4873c',
     },
   },
   newsletter: {
