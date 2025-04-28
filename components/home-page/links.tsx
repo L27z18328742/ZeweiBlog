@@ -28,12 +28,12 @@ const LINKS = [
     emoji: 'smiling-face-with-sunglasses',
     event: 'home-link-about',
   },
-  {
-    title: `流量分析`,
-    href: SITE_METADATA.analytics.umamiAnalytics.shareUrl,
-    emoji: 'bar-chart',
-    event: 'home-link-analytics',
-  },
+  // {
+  //   title: `流量分析`,
+  //   href: SITE_METADATA.analytics.umamiAnalytics.shareUrl,
+  //   emoji: 'bar-chart',
+  //   event: 'home-link-analytics',
+  // },
 ]
 
 export function BlogLinks() {

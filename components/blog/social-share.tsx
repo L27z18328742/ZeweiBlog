@@ -69,7 +69,7 @@ export function SocialShare({ postUrl, filePath, title, className }: SocialButto
               <span>{copied ? 'Copied' : 'Copy link'}</span>
             </button>
           </div>
-          <div className="space-y-3 px-4 py-3">
+          {/* <div className="space-y-3 px-4 py-3">
             <TwitterShareButton
               url={postUrl}
               title={title}
@@ -94,9 +94,9 @@ export function SocialShare({ postUrl, filePath, title, className }: SocialButto
               <Facebook strokeWidth={1.5} size={18} />
               <span className="">Share on Facebook</span>
             </FacebookShareButton>
-          </div>
+          </div> */}
           <div className="flex flex-col gap-3 px-4 py-3">
-            <DiscussOnX postUrl={postUrl} />
+            {/* <DiscussOnX postUrl={postUrl} /> */}
             <EditOnGithub filePath={filePath} />
           </div>
         </MenuItems>

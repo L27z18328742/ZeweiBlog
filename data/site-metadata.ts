@@ -6,7 +6,7 @@ export const SITE_METADATA = {
     '这算是我在网络上的一个小角落吧，主要就是用来记下我学编程、写代码的一些经历。我会把我踩过的坑、学到的经验、一点儿小想法，还有找到的一些好资源，都在这里分享出来，希望能帮助到其他的开发者朋友们。',
   language: 'zh-CN',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://www.leohuynh.dev',
+  siteUrl: 'https://www.lezewei.blog',
   siteRepo: 'https://github.com/L27z18328742',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/1.jpg`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.jpeg`,

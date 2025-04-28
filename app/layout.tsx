@@ -2,8 +2,8 @@ import 'css/tailwind.css'
 import 'css/twemoji.css'
 import 'react-medium-image-zoom/dist/styles.css'
 import 'remark-github-blockquote-alert/alert.css'
-import { SpeedInsights } from "@vercel/speed-insights/next"
-
+import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Analytics } from '@vercel/analytics/react'
 import clsx from 'clsx'
 import type { Metadata } from 'next'
 import { JetBrains_Mono, Nunito, Playpen_Sans } from 'next/font/google'
@@ -93,24 +93,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <link rel="apple-touch-icon" sizes="76x76" href={`${basePath}/static/favicons/favicon.ico`} />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href={`${basePath}/static/favicons/1.jpg`}
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href={`${basePath}/static/favicons/1.jpg`}
-      />
+      <link rel="icon" type="image/png" sizes="32x32" href={`${basePath}/static/favicons/1.jpg`} />
+      <link rel="icon" type="image/png" sizes="16x16" href={`${basePath}/static/favicons/1.jpg`} />
       <link rel="manifest" href={`${basePath}/static/favicons/site.webmanifest`} />
-      <link
-        rel="mask-icon"
-        href={`${basePath}/static/favicons/1.jpg`}
-        color="#5bbad5"
-      />
+      <link rel="mask-icon" href={`${basePath}/static/favicons/1.jpg`} color="#5bbad5" />
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
@@ -130,9 +116,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <KBarSearchProvider configs={SITE_METADATA.search.kbarConfigs}>
             <Header />
             <main className="mb-auto grow">{children}</main>
-            <SpeedInsights />
           </KBarSearchProvider>
           <Footer />
+          <SpeedInsights />
+          <Analytics />
         </ThemeProviders>
       </body>
     </html>

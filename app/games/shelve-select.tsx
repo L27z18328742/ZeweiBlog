@@ -1,40 +1,36 @@
-'use client'
-
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import { ChevronDown } from 'lucide-react'
 import { Fragment } from 'react'
 import { Link } from '~/components/ui/link'
-import { Twemoji } from '~/components/ui/twemoji'
-import type { TitleType } from './title-type-filter'
 
-export const RATES: {
+export const SHELVES: {
   label: string
-  description: string
-  value: RateType
-  emoji: string
+  value: ShelfType
 }[] = [
-  { label: '10', description: 'must watch', value: '10', emoji: 'hundred-points' },
   {
-    label: '9',
-    description: 'recommended',
-    value: '9',
-    emoji: 'sports-medal',
+    label: 'All',
+    value: 'all',
   },
-  { label: '8', description: 'good', value: '8', emoji: 'popcorn' },
-  { label: '7', description: 'okay / not bad', value: '7', emoji: 'thumbs-up' },
   {
-    label: '6-',
-    description: 'i don’t like',
-    value: '<=6',
-    emoji: 'man-gesturing-no',
+    label: 'Reading',
+    value: 'currently-reading',
+  },
+  {
+    label: 'Read',
+    value: 'read',
+  },
+  {
+    label: 'Abandoned',
+    value: 'abandoned',
   },
 ]
 
-export type RateType = '10' | '9' | '8' | '7' | '<=6'
+export type ShelfType = 'all' | 'currently-reading' | 'read' | 'abandoned'
 
-export function RateFilter({ rate, type }: { rate: RateType; type: TitleType }) {
-  let { label, value: selectedValue } = RATES.find(({ value }) => value === rate) || RATES[0]
+export function ShelveSelect({ shelf }: { shelf: ShelfType }) {
+  let { label, value: selectedValue } = SHELVES.find(({ value }) => value === shelf) || SHELVES[0]
+
   return (
     <div className="flex items-center">
       <Menu as="div" className="relative inline-block text-left">
@@ -43,9 +39,7 @@ export function RateFilter({ rate, type }: { rate: RateType; type: TitleType }) 
           className="inline-flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-1.5 font-medium dark:border-gray-700"
           data-umami-event="movies-rate-filter"
         >
-          <span>
-            {label}/10 <span className="hidden md:inline">stars</span>
-          </span>
+          <span>{label}</span>
           <ChevronDown strokeWidth={1.5} size={20} />
         </MenuButton>
         <Transition
@@ -60,13 +54,13 @@ export function RateFilter({ rate, type }: { rate: RateType; type: TitleType }) 
           <MenuItems
             className={clsx([
               'absolute right-0 z-50',
-              'mt-2 origin-top-right rounded-md text-right shadow-lg',
+              'mt-2 w-32 origin-top-right rounded-md text-right shadow-lg',
               'bg-white dark:bg-black',
               'ring-1 ring-black ring-opacity-5 focus:outline-none',
             ])}
           >
             <div className="space-y-1 p-1">
-              {RATES.map(({ label, description, value, emoji }) => (
+              {SHELVES.map(({ label, value }) => (
                 <MenuItem key={value} as="div">
                   {({ close }) => (
                     <Link
@@ -76,12 +70,10 @@ export function RateFilter({ rate, type }: { rate: RateType; type: TitleType }) 
                           ? 'bg-gray-200 dark:bg-gray-800'
                           : 'hover:bg-gray-200 dark:hover:bg-gray-800',
                       ])}
-                      href={`/movies?type=${type}&rate=${value}`}
+                      href={`/books?shelf=${value}`}
                       onClick={close}
                     >
-                      <span>({label})</span>
-                      <span>{description}</span>
-                      <Twemoji emoji={emoji} />
+                      <span data-umami-event="books-shelf-select">{label}</span>
                     </Link>
                   )}
                 </MenuItem>

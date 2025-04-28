@@ -2,16 +2,17 @@ import { Suspense } from 'react'
 import { genPageMetadata } from '~/app/seo'
 import { Container } from '~/components/ui/container'
 import { GrowingUnderline } from '~/components/ui/growing-underline'
+import { Image, Zoom } from '~/components/ui/image'
 import { Link } from '~/components/ui/link'
 import { PageHeader } from '~/components/ui/page-header'
 import { SITE_METADATA } from '~/data/site-metadata'
-import movies from '~/json/movies.json' assert { type: 'json' }
-import { MoviesList } from './movies-list'
-import type { ImdbMovie } from '~/types/data'
+import books from '~/json/books.json' assert { type: 'json' }
+import type { GoodreadsBook } from '~/types/data'
+import { BooksList } from './books-list'
 
-export let metadata = genPageMetadata({ title: 'My movies list' })
+export let metadata = genPageMetadata({ title: 'My bookshelf' })
 
-export default async function MoviesPage() {
+export default async function BooksPage() {
   return (
     <Container className="pt-4 lg:pt-12">
       <PageHeader
@@ -19,36 +20,48 @@ export default async function MoviesPage() {
         description={
           <>
             <p>
-              This is where I log all the movies and TV series I’ve watched. I’m a huge fan of{' '}
-              <span className="font-medium">Tom Hanks</span> and{' '}
-              <span className="font-medium">Christopher Nolan</span>, so expect to see a lot of them
-              in the top spots! Anything I’ve rated 10 stars is something I absolutely love and have
-              probably rewatched many times (highly recommended). Take a look and maybe find your
-              next favorite film!
+              这是我的游戏哦
+              <br />
+              {/* This is where I keep track of what I’ve read and what’s on my reading list. */}
             </p>
-            <p className="mt-3 italic">
-              *Data is exported from my{' '}
-              <Link href={SITE_METADATA.imdbRatingsList} className="font-medium">
+            {/* <p className="mt-3 italic">
+              *Data pulled from my{' '}
+              <Link href={SITE_METADATA.goodreadsBookshelfUrl} className="font-medium">
                 <GrowingUnderline data-umami-event="goodreads-feed" active>
-                  IMDB ratings list
+                  Goodreads bookshelf
                 </GrowingUnderline>
               </Link>
-              , with extra details pulled in from the{' '}
-              <Link href="https://www.omdbapi.com/" className="font-medium">
-                <GrowingUnderline data-umami-event="goodreads-feed" active>
-                  OMDB API
-                </GrowingUnderline>
-              </Link>{' '}
-              for a more complete look at each movie.
-            </p>
+              .
+            </p> */}
           </>
         }
         className="border-b border-gray-200 dark:border-gray-700"
       />
-      <div className="py-5 md:py-10">
-        <Suspense>
-          <MoviesList movies={movies as unknown as ImdbMovie[]} />
-        </Suspense>
+      <Suspense>
+        <BooksList
+          books={
+            books.sort(
+              (a, b) => Number(b.user_rating) - Number(a.user_rating)
+            ) as unknown as GoodreadsBook[]
+          }
+        />
+      </Suspense>
+      <div className="mt-6 border-t border-gray-200 py-5 dark:border-gray-700 md:mt-10 md:py-10">
+        <h3 className="mb-6 text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 md:text-3xl">
+          FYI
+        </h3>
+        <div className="space-y-4">
+          <p>My real life bookshelf and working space.</p>
+          <Zoom>
+            <Image
+              src="/static/images/working-space.jpg"
+              alt="Bookshelf and working space"
+              width={1600}
+              height={1200}
+              className="rounded-2xl object-cover object-center"
+            />
+          </Zoom>
+        </div>
       </div>
     </Container>
   )
