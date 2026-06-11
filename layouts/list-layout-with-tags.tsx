@@ -8,7 +8,6 @@ import { Tag } from '~/components/blog/tags'
 import { SnippetCard } from '~/components/cards/snippet'
 import { Container } from '~/components/ui/container'
 import { PageHeader } from '~/components/ui/page-header'
-import tagData from '~/json/tag-data.json'
 import type { CoreContent } from '~/types/data'
 
 interface ListLayoutProps {
@@ -16,9 +15,17 @@ interface ListLayoutProps {
   description: React.ReactNode
   posts: CoreContent<Blog>[]
   snippets: CoreContent<Snippet>[]
+  /** Slugified tag → count, computed server-side from DB blogs + snippets. */
+  tagCounts: Record<string, number>
 }
 
-export function ListLayoutWithTags({ title, description, posts, snippets }: ListLayoutProps) {
+export function ListLayoutWithTags({
+  title,
+  description,
+  posts,
+  snippets,
+  tagCounts,
+}: ListLayoutProps) {
   let hasBlogs = posts.length > 0
   let hasSnippets = snippets.length > 0
   let [view, setView] = useState<'blogs' | 'snippets'>(hasBlogs ? 'blogs' : 'snippets')
@@ -31,7 +38,7 @@ export function ListLayoutWithTags({ title, description, posts, snippets }: List
         className="border-b border-gray-200 dark:border-gray-700"
       />
       <div className="flex gap-x-12">
-        <TagsList />
+        <TagsList tagCounts={tagCounts} />
         <div className="py-5 md:py-10">
           <div className="mb-6 flex items-center gap-2 text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 md:mb-10 md:justify-end md:text-3xl">
             {hasBlogs && (
@@ -83,8 +90,7 @@ export function ListLayoutWithTags({ title, description, posts, snippets }: List
   )
 }
 
-function TagsList() {
-  let tagCounts = tagData as Record<string, number>
+function TagsList({ tagCounts }: { tagCounts: Record<string, number> }) {
   let tagKeys = Object.keys(tagCounts)
   let sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
 

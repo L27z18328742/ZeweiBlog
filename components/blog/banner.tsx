@@ -6,13 +6,16 @@ import { Link } from '~/components/ui/link'
 import { capitalize, kebabCaseToPlainText } from '~/utils/misc'
 
 export function Banner({ banner, className }: { banner: string; className?: string }) {
+  // Unsplash-convention banners are named `path__author__id.ext`. Banners that
+  // don't follow it (e.g. the site's fallback socialBanner, or images added via
+  // the admin panel) simply render without the photo credit.
   let [path, author, filename] = banner.split('__')
-  let handle = path.split('/').pop() || ''
+  let handle = (path || banner).split('/').pop() || ''
   return (
     <div className={clsx('relative', className)}>
       <Credit
         author={author}
-        id={filename.split('.')[0]}
+        id={filename ? filename.split('.')[0] : ''}
         className={clsx([
           'absolute right-4 top-4 z-10',
           'hidden rounded-xl px-3 py-0.5 lg:block',

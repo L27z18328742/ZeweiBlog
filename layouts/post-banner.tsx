@@ -3,7 +3,7 @@ import type { Blog } from 'contentlayer/generated'
 import type { ReactNode } from 'react'
 import { Banner } from '~/components/blog/banner'
 import { BlogMeta } from '~/components/blog/blog-meta'
-import { Comments } from '~/components/blog/comments'
+import { DbComments } from '~/components/blog/db-comments'
 import { DiscussOnX } from '~/components/blog/discuss-on-x'
 import { EditOnGithub } from '~/components/blog/edit-on-github'
 import { PostTitle } from '~/components/blog/post-title'
@@ -62,7 +62,7 @@ export function PostBanner({ content, children }: LayoutProps) {
             </div>
             {/* <SocialShare postUrl={postUrl} title={title} /> */}
           </div>
-          <Comments />
+          <DbComments slug={slug} type={type.toLowerCase() as 'blog' | 'snippet'} />
         </div>
       </article>
     </Container>

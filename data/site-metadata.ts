@@ -52,8 +52,9 @@ export const SITE_METADATA = {
   },
   search: {
     kbarConfigs: {
-      // path to load documents to search
-      searchDocumentsPath: `${process.env.BASE_PATH || ''}/search.json`,
+      // path to load documents to search — served dynamically so DB-managed
+      // blog posts stay searchable (see app/api/search/route.ts)
+      searchDocumentsPath: `${process.env.BASE_PATH || ''}/api/search`,
     },
   },
   support: {

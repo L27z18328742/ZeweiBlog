@@ -29,8 +29,9 @@ public/sitemap.xml
 # rss feed
 /public/feed.xml
 
-# search
+# search (now served dynamically via /api/search; contentlayer may still emit these)
 /public/search.json
+/public/search
 
 # misc
 .DS_Store

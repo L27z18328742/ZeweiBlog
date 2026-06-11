@@ -1,13 +1,16 @@
 import { genPageMetadata } from 'app/seo'
-import { allBlogs, allSnippets } from 'contentlayer/generated'
+import { allSnippets } from 'contentlayer/generated'
 import { slug } from 'github-slugger'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { SITE_METADATA } from '~/data/site-metadata'
-import tagData from '~/json/tag-data.json'
+import { getAllBlogPosts } from '~/db/posts'
 import { ListLayoutWithTags } from '~/layouts/list-layout-with-tags'
 import { allCoreContent } from '~/utils/contentlayer'
 import { sortPosts } from '~/utils/misc'
+import { getTagCounts } from '~/utils/tags'
+
+export const revalidate = 60
 
 export async function generateMetadata(props: {
   params: Promise<{ tag: string }>
@@ -27,7 +30,7 @@ export async function generateMetadata(props: {
 }
 
 export let generateStaticParams = async () => {
-  let tagCounts = tagData as Record<string, number>
+  let tagCounts = await getTagCounts()
   let tagKeys = Object.keys(tagCounts)
   let paths = tagKeys.map((tag) => ({
     tag: encodeURI(tag),
@@ -38,6 +41,8 @@ export let generateStaticParams = async () => {
 export default async function TagPage(props: { params: Promise<{ tag: string }> }) {
   let params = await props.params
   let tag = decodeURI(params.tag)
+  let allBlogs = await getAllBlogPosts()
+  let tagCounts = await getTagCounts()
   // Capitalize first letter and convert space to dash
   let title = '#' + tag[0] + tag.split(' ').join('-').slice(1)
   let filteredPosts = allCoreContent(
@@ -61,6 +66,7 @@ export default async function TagPage(props: { params: Promise<{ tag: string }> 
       }
       posts={filteredPosts}
       snippets={filteredSnippets}
+      tagCounts={tagCounts}
     />
   )
 }

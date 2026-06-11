@@ -1,9 +1,11 @@
-import { allBlogs, allSnippets } from 'contentlayer/generated'
+import { allSnippets } from 'contentlayer/generated'
 import type { MetadataRoute } from 'next'
 import { SITE_METADATA } from '~/data/site-metadata'
+import { getAllBlogPosts } from '~/db/posts'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let siteUrl = SITE_METADATA.siteUrl
+  let allBlogs = await getAllBlogPosts()
   let blogRoutes = allBlogs
     .filter((p) => !p.draft)
     .map(({ path, lastmod, date }) => ({

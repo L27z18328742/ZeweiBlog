@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 import { BackToPosts } from '~/components/blog/back-to-posts'
 import { Banner } from '~/components/blog/banner'
 import { BlogMeta } from '~/components/blog/blog-meta'
-import { Comments } from '~/components/blog/comments'
+import { DbComments } from '~/components/blog/db-comments'
 import { PostNav } from '~/components/blog/post-nav'
 import { PostTitle } from '~/components/blog/post-title'
 import { Reactions } from '~/components/blog/reactions'
@@ -91,7 +91,7 @@ export function PostLayout({ content, next, prev, children }: LayoutProps) {
         <GradientDivider />
         <div className="space-y-4">
           <PostNav next={next} nextLabel="Next post" prev={prev} prevLabel="Previous post" />
-          <Comments configs={{ reactions: '0' }} />
+          <DbComments slug={slug} type={type.toLowerCase() as 'blog' | 'snippet'} />
         </div>
       </article>
     </Container>

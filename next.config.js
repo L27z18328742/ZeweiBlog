@@ -68,6 +68,10 @@ module.exports = () => {
     basePath,
     reactStrictMode: true,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+    // mdx-bundler runs esbuild (a native binary) at runtime to compile MDX on
+    // admin save; sharp (native) compresses uploaded images. These must stay
+    // external so webpack doesn't try to bundle them.
+    serverExternalPackages: ['mdx-bundler', 'esbuild', 'sharp'],
     images: {
       remotePatterns: [
         {

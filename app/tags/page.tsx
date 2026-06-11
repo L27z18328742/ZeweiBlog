@@ -1,12 +1,14 @@
 import { genPageMetadata } from 'app/seo'
 import { Tag } from '~/components/blog/tags'
 import { Container } from '~/components/ui/container'
-import tagData from '~/json/tag-data.json'
+import { getTagCounts } from '~/utils/tags'
 
 export let metadata = genPageMetadata({ title: 'Tags', description: 'Things I blog about' })
 
+export const revalidate = 60
+
 export default async function Page() {
-  let tagCounts = tagData as Record<string, number>
+  let tagCounts = await getTagCounts()
   let tagKeys = Object.keys(tagCounts)
   let sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
   return (

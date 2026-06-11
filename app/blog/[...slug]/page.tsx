@@ -1,16 +1,20 @@
 import type { Author, Blog } from 'contentlayer/generated'
-import { allAuthors, allBlogs } from 'contentlayer/generated'
+import { allAuthors } from 'contentlayer/generated'
 // import 'css/prism.css'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { MDX_COMPONENTS } from '~/components/mdx'
 import { MDXLayoutRenderer } from '~/components/mdx/layout-renderer'
 import { SITE_METADATA } from '~/data/site-metadata'
+import { getAllBlogPosts, getBlogPostBySlug } from '~/db/posts'
 import { PostBanner } from '~/layouts/post-banner'
 import { PostLayout } from '~/layouts/post-layout'
 import { PostSimple } from '~/layouts/post-simple'
 import { allCoreContent, coreContent } from '~/utils/contentlayer'
 import { sortPosts } from '~/utils/misc'
+
+// Re-fetch DB posts at most every 60s so admin edits appear without a redeploy.
+export const revalidate = 60
 
 const DEFAULT_LAYOUT = 'PostLayout'
 const LAYOUTS = {
@@ -24,6 +28,7 @@ export async function generateMetadata(props: {
 }): Promise<Metadata | undefined> {
   let params = await props.params
   let slug = decodeURI(params.slug.join('/'))
+  let allBlogs = await getAllBlogPosts()
   let post = allBlogs.find((p) => p.slug === slug)
   let authorList = post?.authors || ['default']
   let authorDetails = authorList.map((author) => {
@@ -72,12 +77,15 @@ export async function generateMetadata(props: {
 }
 
 export let generateStaticParams = async () => {
+  let allBlogs = await getAllBlogPosts()
   return allBlogs.map((p) => ({ slug: p.slug.split('/').map((name) => decodeURI(name)) }))
 }
 
 export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
   const params = await props.params
   let slug = decodeURI(params.slug.join('/'))
+  // Lightweight list (no body) for prev/next navigation...
+  let allBlogs = await getAllBlogPosts()
   // Filter out drafts in production
   let sortedCoreContents = allCoreContent(sortPosts(allBlogs))
   let postIndex = sortedCoreContents.findIndex((p) => p.slug === slug)
@@ -87,7 +95,11 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
 
   let prev = sortedCoreContents[postIndex + 1]
   let next = sortedCoreContents[postIndex - 1]
-  let post = allBlogs.find((p) => p.slug === slug) as Blog
+  // ...and a single full fetch (with compiled body) for the post being rendered.
+  let post = (await getBlogPostBySlug(slug)) as Blog
+  if (!post) {
+    return notFound()
+  }
   let authorList = post?.authors || ['default']
   let authorDetails = authorList.map((author) => {
     let authorResults = allAuthors.find((p) => p.slug === author)

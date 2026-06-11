@@ -1,14 +1,15 @@
+import { config } from 'dotenv'
 import type { Blog, Snippet } from 'contentlayer/generated'
 import { mkdirSync, writeFileSync } from 'fs'
 import { slug } from 'github-slugger'
 import path from 'path'
-import { allBlogs, allSnippets } from '~/.contentlayer/generated/index.mjs'
+import { allSnippets } from '~/.contentlayer/generated/index.mjs'
 import { SITE_METADATA } from '~/data/site-metadata'
-import tagData from '~/json/tag-data.json' assert { type: 'json' }
 import { escape } from '~/utils/html-escaper'
 import { sortPosts } from '~/utils/misc'
 
-const blogs = allBlogs as unknown as Blog[]
+config({ path: '.env' })
+
 const snippets = allSnippets as unknown as Snippet[]
 const RSS_PAGE = 'feed.xml'
 
@@ -47,6 +48,11 @@ function generateRss(items: (Blog | Snippet)[], page = RSS_PAGE) {
 }
 
 export async function generateRssFeed() {
+  // Blogs now live in the DB; fetch them here (build-time, Node — safe to import
+  // the read module). Snippets still come from contentlayer.
+  let { getAllBlogPosts } = await import('~/db/posts')
+  let blogs = (await getAllBlogPosts()) as unknown as Blog[]
+
   let publishPosts = blogs.filter((post) => post.draft !== true)
   let publishSnippets = snippets.filter((post) => post.draft !== true)
   // RSS for blog post & snippet
@@ -56,10 +62,15 @@ export async function generateRssFeed() {
   }
 
   if (publishPosts.length > 0 || publishSnippets.length > 0) {
+    // Derive the tag set directly from posts/snippets (replaces tag-data.json).
+    let tags = new Set<string>()
+    for (let p of [...publishPosts, ...publishSnippets]) {
+      for (let t of p.tags ?? []) tags.add(slug(t))
+    }
     // RSS for tags
-    for (let tag of Object.keys(tagData)) {
-      let filteredPosts = blogs.filter((p) => p.tags.map((t) => slug(t)).includes(tag))
-      let filteredSnippets = snippets.filter((s) => s.tags.map((t) => slug(t)).includes(tag))
+    for (let tag of tags) {
+      let filteredPosts = publishPosts.filter((p) => p.tags.map((t) => slug(t)).includes(tag))
+      let filteredSnippets = publishSnippets.filter((s) => s.tags.map((t) => slug(t)).includes(tag))
       let rss = generateRss([...filteredPosts, ...filteredSnippets], `tags/${tag}/feed.xml`)
       let rssPath = path.join('public', 'tags', tag)
       mkdirSync(rssPath, { recursive: true })
